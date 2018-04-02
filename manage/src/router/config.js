@@ -1,8 +1,7 @@
 //博客列表页
-import Article from '../views/article/index.vue'
-import Main from '../views/main/index.vue'
-import Read from '../views/read/index.vue'
-
+const Article = () => import('../views/article/index.vue')
+const Main = () => import('../views/main/index.vue')
+const Read = () => import('../views/read/index.vue')
 /**
 * 路由配置
 */
