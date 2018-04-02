@@ -38,6 +38,9 @@ module.exports = class extends Base {
           collect_id: obj.collect_id
         };
         const list = yield think.model('article/article').queryArticle(query);
+        for (let i = 0, j = list.length; i < j; i++) {
+          list[i].content = unescape(list[i].content);
+        }
         _this2.body = {
           data: list,
           status: 0

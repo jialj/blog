@@ -29,6 +29,9 @@ module.exports = class extends Base {
         collect_id: obj.collect_id
       }
       const list = await think.model('article/article').queryArticle(query)
+      for(let i=0,j=list.length; i<j; i++){
+        list[i].content = unescape(list[i].content)
+      }
       this.body = {
         data: list,
         status: 0

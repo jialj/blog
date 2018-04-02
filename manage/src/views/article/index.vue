@@ -155,18 +155,19 @@
 <style scoped>
 .main{
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
 	display: flex;
+	align-items: stretch;
 	color: #595959;
 }
 .collect-list{
 	min-width: 200px;
-	height: 100%;
+	min-height: 100%;
   background-color: rgb(242, 240, 238);
 }
 .article-list{
 	min-width: 250px;
-	height: 100%;
+	min-height: 100%;
 	border-left: 1px solid rgb(219,219,219);
 	border-right: 1px solid rgb(219,219,219)
 }
