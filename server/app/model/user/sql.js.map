@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/user/sql.js"
+    ],
+    "names": [
+        "queryUser",
+        "params",
+        "user_name",
+        "module",
+        "exports"
+    ],
+    "mappings": "AAAA;;;;AAIA,IAAIA,YAAaC,MAAD,IAAY;AAC1B,SAAQ,4CAA2CA,OAAOC,SAAU,IAApE;AACD,CAFD;;AAIAC,OAAOC,OAAP,GAAiB;AACfJ,aAAWA;AADI,CAAjB",
+    "file": "../../../src/model/user/sql.js",
+    "sourcesContent": [
+        "/**\n * 查询列表sql\n * @param {*} params \n */\nlet queryUser = (params) => {\n  return `SELECT * FROM blog_user WHERE user_name='${params.user_name}';`\n}\n\nmodule.exports = {\n  queryUser: queryUser\n}"
+    ]
+}

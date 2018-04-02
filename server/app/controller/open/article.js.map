@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/open/article.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "utils",
+        "module",
+        "exports",
+        "indexAction",
+        "list",
+        "think",
+        "model",
+        "queryArticle",
+        "get",
+        "ret",
+        "map",
+        "article",
+        "art",
+        "create_time",
+        "split",
+        "create_date",
+        "time",
+        "content",
+        "unescape",
+        "body",
+        "data",
+        "status"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,YAAR,CAAb;AACA,MAAMC,QAAQD,QAAQ,wBAAR,CAAd;;AAEAE,OAAOC,OAAP,GAAiB,cAAcJ,IAAd,CAAmB;AAClC;;;AAGMK,aAAN,GAAoB;AAAA;;AAAA;AAClB,UAAIC,OAAO,MAAMC,MAAMC,KAAN,CAAY,iBAAZ,EAA+BC,YAA/B,CAA4C,MAAKC,GAAL,EAA5C,CAAjB;AACA,UAAIC,MAAML,KAAKM,GAAL,CAAS,UAACC,OAAD,EAAa;AAC9B,YAAIC,MAAMD,QAAQE,WAAR,CAAoBC,KAApB,CAA0B,GAA1B,CAAV;AACAH,gBAAQI,WAAR,GAAsBH,IAAI,CAAJ,CAAtB;AACAD,gBAAQK,IAAR,GAAeJ,IAAI,CAAJ,CAAf;AACAD,gBAAQM,OAAR,GAAkBC,SAASP,QAAQM,OAAjB,CAAlB;AACA,eAAON,OAAP;AACD,OANS,CAAV;AAOA,YAAKQ,IAAL,GAAY;AACVC,cAAMX,GADI;AAEVY,gBAAQ;AAFE,OAAZ;AAIA,aAAOZ,GAAP;AAbkB;AAcnB;AAlBiC,CAApC",
+    "file": "../../../src/controller/open/article.js",
+    "sourcesContent": [
+        "const Base = require('../base.js');\nconst utils = require('../../utils/default.js');\n\nmodule.exports = class extends Base {\n  /**\n   * 查询文章列表\n   */\n  async indexAction() {\n    let list = await think.model('article/article').queryArticle(this.get())\n    let ret = list.map((article) => {\n      let art = article.create_time.split(' ')\n      article.create_date = art[0]\n      article.time = art[1]\n      article.content = unescape(article.content)\n      return article\n    })\n    this.body = {\n      data: ret,\n      status: 0\n    }\n    return ret;\n  }\n};\n"
+    ]
+}

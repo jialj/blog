@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/index.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "list",
+        "think",
+        "model",
+        "queryArticle",
+        "get",
+        "console",
+        "log",
+        "body",
+        "data",
+        "status",
+        "addAction",
+        "obj",
+        "type_id",
+        "title",
+        "content",
+        "create_time",
+        "from",
+        "author",
+        "res",
+        "addArticle"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,OAAO,MAAMC,MAAMC,KAAN,CAAY,iBAAZ,EAA+BC,YAA/B,CAA4C,MAAKC,GAAL,EAA5C,CAAnB;AACAC,cAAQC,GAAR,CAAY,QAAZ,EAAqBN,IAArB;AACA,YAAKO,IAAL,GAAY;AACVC,cAAMR,IADI;AAEVS,gBAAQ;AAFE,OAAZ;AAIA,aAAOT,IAAP;AAPkB;AAQnB;AACKU,WAAN,GAAkB;AAAA;;AAAA;AAChB,YAAMC,MAAM;AACVC,iBAAS,GADC;AAEVC,eAAO,GAFG;AAGVC,iBAAS,GAHC;AAIVC,qBAAa,GAJH;AAKVC,cAAM,GALI;AAMVC,gBAAQ;AANE,OAAZ;AAQA,YAAMC,MAAM,MAAMjB,MAAMC,KAAN,CAAY,iBAAZ,EAA+BiB,UAA/B,CAA0CR,GAA1C,CAAlB;AACAN,cAAQC,GAAR,CAAY,QAAZ,EAAsBY,GAAtB;AACA,aAAKX,IAAL,GAAYW,GAAZ;AAXgB;AAYjB;AAtBiC,CAApC",
+    "file": "../../src/controller/index.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n    const list = await think.model('article/article').queryArticle(this.get())\n    console.log('list--',list)\n    this.body = {\n      data: list,\n      status: 0\n    }\n    return list;\n  }\n  async addAction() {\n    const obj = {\n      type_id: '2',\n      title: '2',\n      content: '2',\n      create_time: '2',\n      from: '2',\n      author: '2'\n    }\n    const res = await think.model('article/article').addArticle(obj)\n    console.log('res---', res)\n    this.body = res\n  }\n};\n"
+    ]
+}

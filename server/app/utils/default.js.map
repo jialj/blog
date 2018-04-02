@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/utils/default.js"
+    ],
+    "names": [
+        "getStandardDate",
+        "date",
+        "year",
+        "getFullYear",
+        "Month",
+        "getMonth",
+        "getDate",
+        "getHours",
+        "getMinutes",
+        "getSeconds"
+    ],
+    "mappings": ";QACgBA,e,GAAAA,e;AADhB;AACO,SAASA,eAAT,CAAyBC,IAAzB,EAA8B;AACnC,MAAIC,OAAOD,KAAKE,WAAhB;AACA,MAAIC,QAAQH,KAAKI,QAAL,KAAgB,CAA5B;AACA,SAAQ,GAAEJ,KAAKE,WAAL,EAAmB,IAAGF,KAAKI,QAAL,KAAgB,CAAE,IAAGJ,KAAKK,OAAL,EAAe,IAAGL,KAAKM,QAAL,EAAgB,IAAGN,KAAKO,UAAL,EAAkB,IAAGP,KAAKQ,UAAL,EAAkB,EAAjI;AACD",
+    "file": "../../src/utils/default.js",
+    "sourcesContent": [
+        "// YYYY-MM-DD HH:MM:SS\nexport function getStandardDate(date){\n  let year = date.getFullYear;\n  let Month = date.getMonth()+1;\n  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`\n}"
+    ]
+}

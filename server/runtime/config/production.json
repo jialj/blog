@@ -1,0 +1,74 @@
+{
+  "port": 8360,
+  "workers": 0,
+  "stickyCluster": false,
+  "startServerTimeout": 3000,
+  "reloadSignal": "SIGUSR2",
+  "processKillTimeout": 10000,
+  "jsonpCallbackField": "callback",
+  "jsonContentType": "application/json",
+  "jsonpContentType": "application/javascript",
+  "errnoField": "errno",
+  "errmsgField": "errmsg",
+  "defaultErrno": 1000,
+  "validateDefaultErrno": 1001,
+  "cache": {
+    "type": "file",
+    "file": {
+      "timeout": 86400000,
+      "cachePath": "/Users/jialinjing/360/github/blog/server/runtime/cache",
+      "pathDepth": 1,
+      "gcInterval": 86400000
+    }
+  },
+  "model": {
+    "type": "mysql",
+    "mysql": {
+      "logConnect": false,
+      "logSql": false,
+      "database": "blogs",
+      "prefix": "",
+      "encoding": "utf8",
+      "host": "47.104.17.105",
+      "port": "3306",
+      "user": "dev",
+      "password": "Jialinjing123?",
+      "dateStrings": true
+    }
+  },
+  "session": {
+    "type": "file",
+    "file": {
+      "cookie": {
+        "name": "thinkjs",
+        "maxAge": 43200000
+      },
+      "sessionPath": "/Users/jialinjing/360/github/blog/server/runtime/session"
+    }
+  },
+  "view": {
+    "type": "nunjucks",
+    "nunjucks": {
+      "viewPath": "/Users/jialinjing/360/github/blog/server/view",
+      "sep": "_",
+      "extname": ".html"
+    }
+  },
+  "logger": {
+    "type": "dateFile",
+    "console": {},
+    "file": {
+      "backups": 10,
+      "absolute": true,
+      "maxLogSize": 51200,
+      "filename": "/Users/jialinjing/360/github/blog/server/logs/app.log"
+    },
+    "dateFile": {
+      "level": "ALL",
+      "absolute": true,
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": true,
+      "filename": "/Users/jialinjing/360/github/blog/server/logs/app.log"
+    }
+  }
+}

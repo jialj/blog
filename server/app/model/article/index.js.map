@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/article/index.js"
+    ],
+    "names": [
+        "sql",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "queryArticle",
+        "data",
+        "query",
+        "Object",
+        "assign",
+        "order",
+        "limit",
+        "offset",
+        "queryList",
+        "addArticle",
+        "obj",
+        "console",
+        "log",
+        "type_id",
+        "title",
+        "content",
+        "create_time",
+        "from",
+        "author",
+        "execute"
+    ],
+    "mappings": "AAAA,MAAMA,MAAMC,QAAQ,UAAR,CAAZ;AACAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzC;;AAEAC,eAAaC,IAAb,EAAmB;AACjB,UAAMC,QAAQC,OAAOC,MAAP,CAAc;AAC1BC,aAAO,IADmB;AAE1BC,aAAO,CAFmB;AAG1BC,cAAQ;AAHkB,KAAd,EAIZN,IAJY,CAAd;AAKA,WAAO,KAAKC,KAAL,CAAWR,IAAIc,SAAJ,CAAcN,KAAd,CAAX,CAAP;AACD;AACDO,aAAWC,GAAX,EAAgB;AACdC,YAAQC,GAAR,CAAY,OAAZ,EAAsB,2FAA0FF,IAAIG,OAAQ,OAAMH,IAAII,KAAM,OAAMJ,IAAIK,OAAQ,OAAML,IAAIM,WAAY,OAAMN,IAAIO,IAAK,OAAMP,IAAIQ,MAAO,IAApN;AACA,WAAO,KAAKC,OAAL,CACJ,+FAA8FT,IAAIG,OAAQ,OAAMH,IAAII,KAAM,OAAMJ,IAAIK,OAAQ,OAAML,IAAIM,WAAY,OAAMN,IAAIO,IAAK,OAAMP,IAAIQ,MAAO,IAD9L,CAAP;AAGD;AAhBwC,CAA3C",
+    "file": "../../../src/model/article/index.js",
+    "sourcesContent": [
+        "const sql = require('./sql.js');\nmodule.exports = class extends think.Model {\n  // INSERT INTO `blogs`.`article` (`id`, `type_id`, `title`, `content`, `create_time`, `from`, `author`) VALUES ('2', '1', '1', '1', '1', '1', '1');\n  \n  queryArticle(data) {\n    const query = Object.assign({\n      order: 'id',\n      limit: 0,\n      offset: 10\n    },data);\n    return this.query(sql.queryList(query));\n  }\n  addArticle(obj) {\n    console.log('sql--', `INSERT INTO blogs.article (type_id, title, content, create_time, from, author) VALUES ('${obj.type_id}', '${obj.title}', '${obj.content}', '${obj.create_time}', '${obj.from}', '${obj.author}')`)\n    return this.execute(\n      `INSERT INTO blogs.article (type_id, title, content, create_time, art_from, author) VALUES ('${obj.type_id}', '${obj.title}', '${obj.content}', '${obj.create_time}', '${obj.from}', '${obj.author}')`\n    );\n  }\n};"
+    ]
+}

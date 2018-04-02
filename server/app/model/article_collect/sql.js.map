@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/article_collect/sql.js"
+    ],
+    "names": [
+        "queryArticleCollect",
+        "params",
+        "addArticleCollect",
+        "obj",
+        "collect_name",
+        "collect_description",
+        "deleteArticleCollect",
+        "id",
+        "updateArticleCollect",
+        "setStr",
+        "length",
+        "substring",
+        "module",
+        "exports"
+    ],
+    "mappings": "AAAA;;;;AAIA,IAAIA,sBAAuBC,MAAD,IAAY;AACpC,SAAQ,iDAAR;AACD,CAFD;;AAIA,IAAIC,oBAAqBC,GAAD,IAAS;AAC/B,SAAQ,4EAA2EA,IAAIC,YAAJ,IAAoB,EAAG,OAAMD,IAAIE,mBAAJ,IAA2B,EAAG,IAA9I;AACD,CAFD;;AAIA,IAAIC,uBAAwBH,GAAD,IAAS;AAClC,SAAQ,0CAAyCA,IAAII,EAAG,EAAxD;AACD,CAFD;AAGA,IAAIC,uBAAwBL,GAAD,IAAS;AAClC,MAAIM,SAAU,CAACN,IAAIC,YAAJ,GAAoB,mBAAkBD,IAAIC,YAAa,IAAvD,GAA6D,EAA9D,KACCD,IAAIE,mBAAJ,GAA2B,0BAAyBF,IAAIE,mBAAoB,IAA5E,GAAkF,EADnF,CAAd;AAEA,MAAII,OAAOC,MAAP,GAAc,CAAlB,EAAqB;AACnBD,aAAQA,OAAOE,SAAP,CAAiB,CAAjB,EAAmBF,OAAOC,MAAP,GAAc,CAAjC,CAAR;AACD;AACD,SAAQ,8BAA6BD,MAAO,aAAYN,IAAII,EAAG,GAA/D;AACD,CAPD;;AASAK,OAAOC,OAAP,GAAiB;AACfb,uBAAqBA,mBADN;AAEfE,qBAAmBA,iBAFJ;AAGfI,wBAAsBA,oBAHP;AAIfE,wBAAsBA;AAJP,CAAjB",
+    "file": "../../../src/model/article_collect/sql.js",
+    "sourcesContent": [
+        "/**\n * 查询列表sql\n * @param {*} params \n */\nlet queryArticleCollect = (params) => {\n  return `SELECT * FROM article_collect ORDER BY id DESC;`\n}\n\nlet addArticleCollect = (obj) => {\n  return `INSERT INTO article_collect (collect_name, collect_description) VALUES ('${obj.collect_name || ''}', '${obj.collect_description || ''}')`\n}\n\nlet deleteArticleCollect = (obj) => {\n  return `DELETE FROM article_collect WHERE ID = ${obj.id}`\n}\nlet updateArticleCollect = (obj) => {\n  let setStr =  (obj.collect_name ? `collect_name = '${obj.collect_name}',` : '' )+\n                (obj.collect_description ? `collect_description = '${obj.collect_description}',` : '')\n  if (setStr.length>1) {\n    setStr= setStr.substring(0,setStr.length-1)\n  }\n  return `UPDATE article_collect SET ${setStr} WHERE id=${obj.id};`\n}\n\nmodule.exports = {\n  queryArticleCollect: queryArticleCollect,\n  addArticleCollect: addArticleCollect,\n  deleteArticleCollect: deleteArticleCollect,\n  updateArticleCollect: updateArticleCollect,\n}"
+    ]
+}

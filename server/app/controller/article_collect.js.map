@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/article_collect.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "queryAction",
+        "list",
+        "think",
+        "model",
+        "queryArticleCollect",
+        "get",
+        "body",
+        "data",
+        "status",
+        "addAction",
+        "obj",
+        "post",
+        "res",
+        "addArticleCollect",
+        "deleteAction",
+        "deleteArticleCollect",
+        "updateAction",
+        "updateArticleCollect"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAClC;;;AAGMI,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,OAAO,MAAMC,MAAMC,KAAN,CAAY,iCAAZ,EAA+CC,mBAA/C,CAAmE,MAAKC,GAAL,EAAnE,CAAnB;AACA,YAAKC,IAAL,GAAY;AACVC,cAAMN,IADI;AAEVO,gBAAQ;AAFE,OAAZ;AAIA,aAAOP,IAAP;AANkB;AAOnB;AACD;;;AAGMQ,WAAN,GAAkB;AAAA;;AAAA;AAChB,YAAMC,MAAM,OAAKC,IAAL,EAAZ;AACA,YAAMC,MAAM,MAAMV,MAAMC,KAAN,CAAY,iCAAZ,EAA+CU,iBAA/C,CAAiEH,GAAjE,CAAlB;AACA,UAAIE,OAAO,CAAX,EAAa;AACX,cAAMX,OAAO,MAAMC,MAAMC,KAAN,CAAY,iCAAZ,EAA+CC,mBAA/C,EAAnB;AACA,eAAKE,IAAL,GAAY;AACVC,gBAAMN,IADI;AAEVO,kBAAQ;AAFE,SAAZ;AAIA,eAAOP,IAAP;AACD,OAPD,MAOK;AACH,eAAKK,IAAL,GAAY;AACVC,gBAAM,MADI;AAEVC,kBAAQ;AAFE,SAAZ;AAIA;AACD;AAhBe;AAiBjB;AACD;;;AAGMM,cAAN,GAAqB;AAAA;;AAAA;AACnB,YAAMJ,MAAM,OAAKC,IAAL,EAAZ;AACA,YAAMC,MAAM,MAAMV,MAAMC,KAAN,CAAY,iCAAZ,EAA+CY,oBAA/C,CAAoEL,GAApE,CAAlB;AACA,aAAKJ,IAAL,GAAY;AACVC,cAAMK,GADI;AAEVJ,gBAAQ;AAFE,OAAZ;AAHmB;AAOpB;AACD;;;AAGMQ,cAAN,GAAqB;AAAA;;AAAA;AACnB,YAAMN,MAAM,OAAKC,IAAL,EAAZ;AACA,YAAMC,MAAM,MAAMV,MAAMC,KAAN,CAAY,iCAAZ,EAA+Cc,oBAA/C,CAAoEP,GAApE,CAAlB;AACA,aAAKJ,IAAL,GAAY;AACVC,cAAMK,GADI;AAEVJ,gBAAQ;AAFE,OAAZ;AAHmB;AAOpB;;AAtDiC,CAApC",
+    "file": "../../src/controller/article_collect.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  /**\n   * 查询文章集合\n   */\n  async queryAction() {\n    const list = await think.model('article_collect/article_collect').queryArticleCollect(this.get())\n    this.body = {\n      data: list,\n      status: 0\n    }\n    return list;\n  }\n  /**\n   * 新增文集\n   */\n  async addAction() {\n    const obj = this.post()\n    const res = await think.model('article_collect/article_collect').addArticleCollect(obj)\n    if( res == 1){\n      const list = await think.model('article_collect/article_collect').queryArticleCollect()\n      this.body = {\n        data: list,\n        status: 0\n      }\n      return list;\n    }else{\n      this.body = {\n        data: '新增失败',\n        status: 0\n      }\n      return\n    }\n  }\n  /**\n   * 删除文集\n   */\n  async deleteAction() {\n    const obj = this.post()\n    const res = await think.model('article_collect/article_collect').deleteArticleCollect(obj)\n    this.body = {\n      data: res,\n      status: 0\n    }\n  }\n  /**\n   * 修改文集\n   */\n  async updateAction() {\n    const obj = this.post()\n    const res = await think.model('article_collect/article_collect').updateArticleCollect(obj)\n    this.body = {\n      data: res,\n      status: 0\n    }\n  }\n  \n};\n"
+    ]
+}

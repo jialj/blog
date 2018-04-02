@@ -1,0 +1,48 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/article.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "utils",
+        "module",
+        "exports",
+        "indexAction",
+        "list",
+        "think",
+        "model",
+        "queryArticle",
+        "get",
+        "i",
+        "j",
+        "length",
+        "content",
+        "unescape",
+        "body",
+        "data",
+        "status",
+        "addAction",
+        "obj",
+        "post",
+        "date",
+        "getStandardDate",
+        "Date",
+        "create_time",
+        "res",
+        "addArticle",
+        "query",
+        "collect_id",
+        "msg",
+        "deleteAction",
+        "deleteArticle",
+        "updateAction",
+        "updateArticle"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,QAAQD,QAAQ,qBAAR,CAAd;;AAEAE,OAAOC,OAAP,GAAiB,cAAcJ,IAAd,CAAmB;AAClC;;;AAGMK,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,OAAO,MAAMC,MAAMC,KAAN,CAAY,iBAAZ,EAA+BC,YAA/B,CAA4C,MAAKC,GAAL,EAA5C,CAAnB;AACA,WAAI,IAAIC,IAAE,CAAN,EAAQC,IAAEN,KAAKO,MAAnB,EAA2BF,IAAEC,CAA7B,EAAgCD,GAAhC,EAAoC;AAClCL,aAAKK,CAAL,EAAQG,OAAR,GAAkBC,SAAST,KAAKK,CAAL,EAAQG,OAAjB,CAAlB;AACD;AACD,YAAKE,IAAL,GAAY;AACVC,cAAMX,IADI;AAEVY,gBAAQ;AAFE,OAAZ;AAIA,aAAOZ,IAAP;AATkB;AAUnB;AACD;;;AAGMa,WAAN,GAAkB;AAAA;;AAAA;AAChB,YAAMC,MAAM,OAAKC,IAAL,EAAZ;AACA,YAAMC,OAAOpB,MAAMqB,eAAN,CAAsB,IAAIC,IAAJ,EAAtB,CAAb;AACAJ,UAAIK,WAAJ,GAAkBH,IAAlB;AACA,YAAMI,MAAM,MAAMnB,MAAMC,KAAN,CAAY,iBAAZ,EAA+BmB,UAA/B,CAA0CP,GAA1C,CAAlB;AACA,UAAGM,OAAO,CAAV,EAAY;AACV,YAAIE,QAAQ;AACVC,sBAAYT,IAAIS;AADN,SAAZ;AAGA,cAAMvB,OAAO,MAAMC,MAAMC,KAAN,CAAY,iBAAZ,EAA+BC,YAA/B,CAA4CmB,KAA5C,CAAnB;AACA,eAAKZ,IAAL,GAAY;AACVC,gBAAMX,IADI;AAEVY,kBAAQ;AAFE,SAAZ;AAIA,eAAOZ,IAAP;AACD,OAVD,MAUK;AACH,eAAKU,IAAL,GAAY;AACVc,eAAK,MADK;AAEVb,gBAAM,EAFI;AAGVC,kBAAQ;AAHE,SAAZ;AAKA;AACD;AAtBe;AAuBjB;AACD;;;AAGMa,cAAN,GAAqB;AAAA;;AAAA;AACnB,YAAMX,MAAM,OAAKC,IAAL,EAAZ;AACA,YAAMK,MAAM,MAAMnB,MAAMC,KAAN,CAAY,iBAAZ,EAA+BwB,aAA/B,CAA6CZ,GAA7C,CAAlB;AACA,aAAKJ,IAAL,GAAY;AACVC,cAAMS,GADI;AAEVR,gBAAQ;AAFE,OAAZ;AAHmB;AAOpB;AACD;;;AAGMe,cAAN,GAAqB;AAAA;;AAAA;AACnB,YAAMb,MAAM,OAAKC,IAAL,EAAZ;AACA,YAAMK,MAAM,MAAMnB,MAAMC,KAAN,CAAY,iBAAZ,EAA+B0B,aAA/B,CAA6Cd,GAA7C,CAAlB;AACA,aAAKJ,IAAL,GAAY;AACVC,cAAMS,GADI;AAEVR,gBAAQ;AAFE,OAAZ;AAHmB;AAOpB;;AA/DiC,CAApC",
+    "file": "../../src/controller/article.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\nconst utils = require('../utils/default.js');\n\nmodule.exports = class extends Base {\n  /**\n   * 查询文章列表\n   */\n  async indexAction() {\n    const list = await think.model('article/article').queryArticle(this.get())\n    for(let i=0,j=list.length; i<j; i++){\n      list[i].content = unescape(list[i].content)\n    }\n    this.body = {\n      data: list,\n      status: 0\n    }\n    return list;\n  }\n  /**\n   * 新增文章\n   */\n  async addAction() {\n    const obj = this.post()\n    const date = utils.getStandardDate(new Date())\n    obj.create_time = date\n    const res = await think.model('article/article').addArticle(obj)\n    if(res == 1){\n      let query = {\n        collect_id: obj.collect_id\n      }\n      const list = await think.model('article/article').queryArticle(query)\n      this.body = {\n        data: list,\n        status: 0\n      }\n      return list;\n    }else{\n      this.body = {\n        msg: '新增失败',\n        data: [],\n        status: 1\n      }\n      return\n    }\n  }\n  /**\n   * 删除文章\n   */\n  async deleteAction() {\n    const obj = this.post()\n    const res = await think.model('article/article').deleteArticle(obj)\n    this.body = {\n      data: res,\n      status: 0\n    }\n  }\n  /**\n   * 修改文章\n   */\n  async updateAction() {\n    const obj = this.post()\n    const res = await think.model('article/article').updateArticle(obj)\n    this.body = {\n      data: res,\n      status: 0\n    }\n  }\n  \n};\n"
+    ]
+}

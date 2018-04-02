@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/article_type/articleType.js"
+    ],
+    "names": [
+        "sql",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "queryArticleType",
+        "data",
+        "query",
+        "addArticleType",
+        "obj",
+        "execute",
+        "deleteArticleType"
+    ],
+    "mappings": "AAAA,MAAMA,MAAMC,QAAQ,UAAR,CAAZ;AACAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzCC,mBAAiBC,IAAjB,EAAuB;AACrB,WAAO,KAAKC,KAAL,CAAWR,IAAIM,gBAAJ,CAAqBE,KAArB,CAAX,CAAP;AACD;AACDC,iBAAeC,GAAf,EAAoB;AAClB,WAAO,KAAKC,OAAL,CAAaX,IAAIS,cAAJ,CAAmBC,GAAnB,CAAb,CAAP;AACD;AACDE,oBAAkBF,GAAlB,EAAuB;AACrB,WAAO,KAAKC,OAAL,CAAaX,IAAIY,iBAAJ,CAAsBF,GAAtB,CAAb,CAAP;AACD;AATwC,CAA3C",
+    "file": "../../../src/model/article_type/articleType.js",
+    "sourcesContent": [
+        "const sql = require('./sql.js')\nmodule.exports = class extends think.Model {\n  queryArticleType(data) {\n    return this.query(sql.queryArticleType(query))\n  }\n  addArticleType(obj) {\n    return this.execute(sql.addArticleType(obj))\n  }\n  deleteArticleType(obj) {\n    return this.execute(sql.deleteArticleType(obj))\n  }\n};"
+    ]
+}

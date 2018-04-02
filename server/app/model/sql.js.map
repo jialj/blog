@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/model/sql.js"
+    ],
+    "names": [
+        "queryList",
+        "params",
+        "orderBy",
+        "order",
+        "limit",
+        "offset",
+        "addArticle",
+        "obj",
+        "type_id",
+        "title",
+        "content",
+        "create_time",
+        "from",
+        "author",
+        "deleteArticle",
+        "id",
+        "updateArticle",
+        "module",
+        "exports"
+    ],
+    "mappings": "AAAA;;;;AAIA,IAAIA,YAAaC,MAAD,IAAY;AAC1B,SAAQ;aACGA,OAAOC,OAAQ,IAAGD,OAAOE,KAAM;UAClCF,OAAOG,KAAM,KAAIH,OAAOI,MAAO,GAFvC;AAGD,CAJD;;AAMA,IAAIC,aAAcC,GAAD,IAAS;AACxB,SAAQ,yFAAwFA,IAAIC,OAAQ,OAAMD,IAAIE,KAAM,OAAMF,IAAIG,OAAQ,OAAMH,IAAII,WAAY,OAAMJ,IAAIK,IAAK,OAAML,IAAIM,MAAO,IAApM;AACD,CAFD;;AAIA,IAAIC,gBAAiBP,GAAD,IAAS;AAC3B,SAAQ,kCAAiCA,IAAIQ,EAAG,EAAhD;AACD,CAFD;;AAIA,IAAIC,gBAAiBT,GAAD,IAAS;AAC3B,SAAQ,qBAAD,GACPA,IAAIC,OADG,GACQ,aAAYD,IAAIC,OAAQ,IADhC,GACsC,KAC7CD,IAAIE,KADyC,GAChC,WAAUF,IAAIE,KAAM,IADY,GACN,KACvCF,IAAIG,OADmC,GACxB,aAAYH,IAAIG,OAAQ,IADA,GACM,KAC7CH,IAAII,WADyC,GAC1B,iBAAgBJ,IAAII,WAAY,IADN,GACY,KACzDJ,IAAIK,IADqD,GAC7C,UAASL,IAAIK,IAAK,IAD2B,GACrB,KACpCL,IAAIM,MADgC,GACtB,YAAWN,IAAIM,MAAO,IADA,GACM,KACzC,sBAPD;AAQD,CATD;;AAWAI,OAAOC,OAAP,GAAiB;AACflB,aAAWA,SADI;AAEfM,cAAYA,UAFG;AAGfQ,iBAAeA,aAHA;AAIfE,iBAAeA;AAJA,CAAjB",
+    "file": "../../src/model/sql.js",
+    "sourcesContent": [
+        "/**\n * 查询列表sql\n * @param {*} params \n */\nlet queryList = (params) => {\n  return `SELECT * FROM article \n  ORDER BY ${params.orderBy} ${params.order}\n  LIMIT ${params.limit}, ${params.offset};`\n}\n\nlet addArticle = (obj) => {\n  return `INSERT INTO article (type_id, title, content, create_time, art_from, author) VALUES ('${obj.type_id}', '${obj.title}', '${obj.content}', '${obj.create_time}', '${obj.from}', '${obj.author}')`\n}\n\nlet deleteArticle = (obj) => {\n  return `DELETE FROM article WHERE ID = ${obj.id}`\n}\n\nlet updateArticle = (obj) => {\n  return `UPDATE article SET `+\n  obj.type_id ? `type_id = ${obj.type_id}, ` : '' +\n  obj.title ? `title = ${obj.title}, ` : '' +\n  obj.content ? `content = ${obj.content}, ` : '' +\n  obj.create_time ? `create_time = ${obj.create_time}, ` : '' +\n  obj.from ? `from = ${obj.from}, ` : '' +\n  obj.author ? `author = ${obj.author}, ` : '' +\n  ` WHERE id=$(obj.id);`\n}\n\nmodule.exports = {\n  queryList: queryList,\n  addArticle: addArticle,\n  deleteArticle: deleteArticle,\n  updateArticle: updateArticle,\n}"
+    ]
+}

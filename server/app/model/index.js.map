@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/model/index.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "queryArticle",
+        "query"
+    ],
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzC;;AAEAC,iBAAe;AACb,WAAO,KAAKC,KAAL,CAAW,wBAAX,CAAP;AACD;AALwC,CAA3C",
+    "file": "../../src/model/index.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Model {\n  // INSERT INTO `blogs`.`article` (`id`, `type_id`, `title`, `content`, `create_time`, `from`, `author`) VALUES ('1', '1', '1', '1', '1', '1', '1');\n  \n  queryArticle() {\n    return this.query('select * from article;');\n  }\n};\n"
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/base.js"
+    ],
+    "names": [
+        "self",
+        "sUser",
+        "session",
+        "ret",
+        "msg",
+        "data",
+        "login",
+        "status",
+        "user",
+        "think",
+        "model",
+        "queryUser",
+        "password",
+        "error",
+        "console",
+        "log",
+        "verifySession",
+        "module",
+        "exports",
+        "Controller",
+        "__before",
+        "ctx",
+        "controller",
+        "startsWith",
+        "body"
+    ],
+    "mappings": ";+BACA,WAA6BA,IAA7B,EAAmC;AACjC,UAAMC,QAAQ,MAAMD,KAAKE,OAAL,CAAa,MAAb,CAApB;;AAEA,QAAIC,MAAM;AACRC,WAAK,KADG;AAERC,YAAM,EAACC,OAAM,KAAP,EAFE;AAGRC,cAAQ;AAHA,KAAV;AAKA,QAAGN,KAAH,EAAS;AACP,UAAI;AACF,YAAIO,OAAO,MAAMC,MAAMC,KAAN,CAAY,WAAZ,EAAyBC,SAAzB,CAAmCV,KAAnC,CAAjB;AACA,YAAGO,QAAQA,KAAK,CAAL,EAAQI,QAAR,KAAqBX,MAAMW,QAAtC,EAA+C;AAC7C,iBAAO,IAAP;AACD,SAFD,MAEK;AACH,iBAAOT,GAAP;AACD;AACF,OAPD,CAOE,OAAOU,KAAP,EAAc;AACfC,gBAAQC,GAAR,CAAY,SAAZ,EAAuBF,KAAvB;AACA,eAAOV,GAAP;AACA;AACF,KAZD,MAYK;AACH,aAAOA,GAAP;AACD;AACF,G;;kBAvBca,a;;;;;;;AAwBfC,OAAOC,OAAP,GAAiB,cAAcT,MAAMU,UAApB,CAA+B;AACzCC,UAAN,GAAiB;AAAA;;AAAA;AACd,UAAG,CAAC,MAAKC,GAAL,CAASC,UAAT,CAAoBC,UAApB,CAA+B,OAA/B,CAAD,IAA4C,MAAKF,GAAL,CAASC,UAAT,KAAwB,OAAvE,EAA+E;AAC7E,YAAIjB,OAAO,MAAMW,oBAAjB;AACA,YAAGX,SAAS,IAAZ,EAAiB;AACf,gBAAKmB,IAAL,GAAYnB,IAAZ;AACA,iBAAO,KAAP;AACD;AACF;AAPa;AAQf;AAT6C,CAAhD",
+    "file": "../../src/controller/base.js",
+    "sourcesContent": [
+        "\nasync function verifySession(self) {\n  const sUser = await self.session('user')\n\n  let ret = {\n    msg: '未登录',\n    data: {login:false},\n    status: 1\n  }\n  if(sUser){\n    try {\n      let user = await think.model('user/user').queryUser(sUser)\n      if(user && user[0].password === sUser.password){\n        return true\n      }else{\n        return ret\n      }\n    } catch (error) {\n     console.log('error--', error)\n     return ret\n    }\n  }else{\n    return ret\n  }\n}\nmodule.exports = class extends think.Controller {\n async __before() {\n    if(!this.ctx.controller.startsWith('open/') && this.ctx.controller !== 'login'){\n      let data = await verifySession(this)\n      if(data !== true){\n        this.body = data\n        return false\n      }\n    }\n  }\n};\n"
+    ]
+}

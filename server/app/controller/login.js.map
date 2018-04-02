@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/login.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "utils",
+        "module",
+        "exports",
+        "indexAction",
+        "sUser",
+        "session",
+        "ret",
+        "msg",
+        "data",
+        "login",
+        "status",
+        "user",
+        "think",
+        "model",
+        "queryUser",
+        "password",
+        "error",
+        "console",
+        "log",
+        "body",
+        "loginAction",
+        "post",
+        "user_name",
+        "length"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,QAAQD,QAAQ,qBAAR,CAAd;;AAEAE,OAAOC,OAAP,GAAiB,cAAcJ,IAAd,CAAmB;AAClC;;;AAGMK,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,QAAQ,MAAM,MAAKC,OAAL,CAAa,MAAb,CAApB;AACA,UAAIC,MAAM;AACRC,aAAK,KADG;AAERC,cAAM,EAACC,OAAM,KAAP,EAFE;AAGRC,gBAAQ;AAHA,OAAV;AAKA,UAAGN,KAAH,EAAS;AACP,YAAI;AACF,cAAIO,OAAO,MAAMC,MAAMC,KAAN,CAAY,WAAZ,EAAyBC,SAAzB,CAAmCV,KAAnC,CAAjB;AACA,cAAGO,KAAK,CAAL,KAAWA,KAAK,CAAL,EAAQI,QAAR,KAAqBX,MAAMW,QAAzC,EAAkD;AAChDT,gBAAII,MAAJ,GAAa,CAAb;AACAJ,gBAAIE,IAAJ,CAASC,KAAT,GAAiB,IAAjB;AACAH,gBAAIC,GAAJ,GAAU,KAAV;AACD;AACF,SAPD,CAOE,OAAOS,KAAP,EAAc;AACdC,kBAAQC,GAAR,CAAY,eAAZ,EAA6BF,KAA7B;AACA,gBAAKG,IAAL,GAAYb,GAAZ;AACD;AACF;AACD,YAAKa,IAAL,GAAYb,GAAZ;AApBkB;AAqBnB;AACKc,aAAN,GAAoB;AAAA;;AAAA;AAClB,UAAId,MAAM;AACRC,aAAK,UADG;AAERC,cAAM;AACJC,iBAAM;AADF,SAFE;AAKRC,gBAAQ;AALA,OAAV;AAOA,UAAIW,OAAO,OAAKA,IAAL,EAAX;AACA,UAAGA,KAAKC,SAAL,IAAkBD,KAAKN,QAA1B,EAAmC;AACjC,YAAIJ,OAAO,MAAMC,MAAMC,KAAN,CAAY,WAAZ,EAAyBC,SAAzB,CAAmCO,IAAnC,CAAjB;AACA,YAAGV,KAAKY,MAAL,KAAgB,CAAnB,EAAqB;AACnB,cAAGZ,KAAK,CAAL,EAAQI,QAAR,GAAiB,EAAjB,KAAwBM,KAAKN,QAAL,GAAc,EAAzC,EAA4C;AAC1C,kBAAM,OAAKV,OAAL,CAAa,MAAb,EAAqBM,KAAK,CAAL,CAArB,CAAN;AACAL,gBAAII,MAAJ,GAAa,CAAb;AACAJ,gBAAIE,IAAJ,CAASC,KAAT,GAAiB,IAAjB;AACAH,gBAAIC,GAAJ,GAAU,MAAV;AACD;AACF;AACF;AACD,aAAKY,IAAL,GAAYb,GAAZ;AACA,aAAO,OAAKa,IAAZ;AArBkB;AAsBnB;AAhDiC,CAApC",
+    "file": "../../src/controller/login.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\nconst utils = require('../utils/default.js');\n\nmodule.exports = class extends Base {\n  /**\n   * 登录查询\n   */\n  async indexAction() {\n    const sUser = await this.session('user')\n    let ret = {\n      msg: '未登录',\n      data: {login:false},\n      status: 1\n    }\n    if(sUser){\n      try {\n        let user = await think.model('user/user').queryUser(sUser)\n        if(user[0] && user[0].password === sUser.password){\n          ret.status = 0\n          ret.data.login = true\n          ret.msg = '已登录'\n        }\n      } catch (error) {\n        console.log('验证登陆报错error--', error)\n        this.body = ret\n      }\n    }\n    this.body = ret\n  }\n  async loginAction() {\n    let ret = {\n      msg: '用户名或密码错误',\n      data: {\n        login:false\n      },\n      status: 1\n    }\n    let post = this.post()\n    if(post.user_name && post.password){\n      let user = await think.model('user/user').queryUser(post)\n      if(user.length === 1){\n        if(user[0].password+'' === post.password+''){\n          await this.session('user', user[0]);\n          ret.status = 0\n          ret.data.login = true\n          ret.msg = '登陆成功'\n        }\n      }\n    }\n    this.body = ret\n    return this.body\n  }\n};\n"
+    ]
+}

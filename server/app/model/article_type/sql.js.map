@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/article_type/sql.js"
+    ],
+    "names": [
+        "queryArticleType",
+        "params",
+        "addArticleType",
+        "obj",
+        "type_name",
+        "type_description",
+        "deleteArticleType",
+        "id",
+        "module",
+        "exports"
+    ],
+    "mappings": "AAAA;;;;AAIA,IAAIA,mBAAoBC,MAAD,IAAY;AACjC,SAAQ,6BAAR;AACD,CAFD;;AAIA,IAAIC,iBAAkBC,GAAD,IAAS;AAC5B,SAAQ,mEAAkEA,IAAIC,SAAU,OAAMD,IAAIE,gBAAiB,IAAnH;AACD,CAFD;;AAIA,IAAIC,oBAAqBH,GAAD,IAAS;AAC/B,SAAQ,uCAAsCA,IAAII,EAAG,EAArD;AACD,CAFD;;AAIAC,OAAOC,OAAP,GAAiB;AACfT,oBAAkBA,gBADH;AAEfE,kBAAgBA,cAFD;AAGfI,qBAAmBA;AAHJ,CAAjB",
+    "file": "../../../src/model/article_type/sql.js",
+    "sourcesContent": [
+        "/**\n * 查询列表sql\n * @param {*} params \n */\nlet queryArticleType = (params) => {\n  return `SELECT * FROM article_type;`\n}\n\nlet addArticleType = (obj) => {\n  return `INSERT INTO article_type (type_name, type_description) VALUES ('${obj.type_name}', '${obj.type_description}')`\n}\n\nlet deleteArticleType = (obj) => {\n  return `DELETE FROM article_type WHERE ID = ${obj.id}`\n}\n\nmodule.exports = {\n  queryArticleType: queryArticleType,\n  addArticleType: addArticleType,\n  deleteArticleType: deleteArticleType,\n}"
+    ]
+}

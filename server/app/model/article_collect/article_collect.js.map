@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/article_collect/article_collect.js"
+    ],
+    "names": [
+        "sql",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "queryArticleCollect",
+        "data",
+        "query",
+        "addArticleCollect",
+        "obj",
+        "execute",
+        "deleteArticleCollect",
+        "updateArticleCollect"
+    ],
+    "mappings": "AAAA,MAAMA,MAAMC,QAAQ,UAAR,CAAZ;AACAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzCC,sBAAoBC,IAApB,EAA0B;AACxB,WAAO,KAAKC,KAAL,CAAWR,IAAIM,mBAAJ,CAAwBC,IAAxB,CAAX,CAAP;AACD;AACDE,oBAAkBC,GAAlB,EAAuB;AACrB,WAAO,KAAKC,OAAL,CAAaX,IAAIS,iBAAJ,CAAsBC,GAAtB,CAAb,CAAP;AACD;AACDE,uBAAqBF,GAArB,EAA0B;AACxB,WAAO,KAAKC,OAAL,CAAaX,IAAIY,oBAAJ,CAAyBF,GAAzB,CAAb,CAAP;AACD;AACDG,uBAAqBH,GAArB,EAA0B;AACxB,WAAO,KAAKC,OAAL,CAAaX,IAAIa,oBAAJ,CAAyBH,GAAzB,CAAb,CAAP;AACD;AAZwC,CAA3C",
+    "file": "../../../src/model/article_collect/article_collect.js",
+    "sourcesContent": [
+        "const sql = require('./sql.js')\nmodule.exports = class extends think.Model {\n  queryArticleCollect(data) {\n    return this.query(sql.queryArticleCollect(data))\n  }\n  addArticleCollect(obj) {\n    return this.execute(sql.addArticleCollect(obj))\n  }\n  deleteArticleCollect(obj) {\n    return this.execute(sql.deleteArticleCollect(obj))\n  }\n  updateArticleCollect(obj) {\n    return this.execute(sql.updateArticleCollect(obj))\n  }\n};"
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/user/user.js"
+    ],
+    "names": [
+        "sql",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "queryUser",
+        "data",
+        "query"
+    ],
+    "mappings": "AAAA,MAAMA,MAAMC,QAAQ,UAAR,CAAZ;AACAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzCC,YAAUC,IAAV,EAAgB;AACd,WAAO,KAAKC,KAAL,CAAWR,IAAIM,SAAJ,CAAcC,IAAd,CAAX,CAAP;AACD;AAHwC,CAA3C",
+    "file": "../../../src/model/user/user.js",
+    "sourcesContent": [
+        "const sql = require('./sql.js')\nmodule.exports = class extends think.Model {\n  queryUser(data) {\n    return this.query(sql.queryUser(data))\n  }\n};"
+    ]
+}

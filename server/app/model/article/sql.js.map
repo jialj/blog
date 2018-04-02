@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/model/article/sql.js"
+    ],
+    "names": [
+        "queryList",
+        "params",
+        "collect_id",
+        "id",
+        "orderBy",
+        "order",
+        "limit",
+        "offset",
+        "addArticle",
+        "obj",
+        "type_id",
+        "title",
+        "escape",
+        "content",
+        "create_time",
+        "from",
+        "author",
+        "deleteArticle",
+        "updateArticle",
+        "setStr",
+        "length",
+        "substring",
+        "module",
+        "exports"
+    ],
+    "mappings": "AAAA;;;;AAIA,IAAIA,YAAaC,MAAD,IAAY;AAC1B,SAAQ;;;;;;;;aAAD,IASNA,OAAOC,UAAP,GAAqB,sBAAqBD,OAAOC,UAAW,EAA5D,GAAgE,EAT1D,KAUND,OAAOE,EAAP,GAAa,cAAaF,OAAOE,EAAG,EAApC,GAAwC,EAVlC,IAWN,eAAcF,OAAOG,OAAQ,IAAGH,OAAOI,KAAM;UACtCJ,OAAOK,KAAM,KAAIL,OAAOM,MAAO,GAZvC;AAaD,CAdD;;AAgBA,IAAIC,aAAcC,GAAD,IAAS;AACxB,SAAQ,oGAAmGA,IAAIP,UAAJ,IAAkB,EAAI,IAAGO,IAAIC,OAAJ,IAAe,CAAG,MAAKD,IAAIE,KAAJ,IAAa,EAAI,OAAMC,OAAOH,IAAII,OAAX,KAAuB,EAAI,OAAMJ,IAAIK,WAAJ,IAAmB,EAAI,OAAML,IAAIM,IAAJ,IAAY,EAAI,OAAMN,IAAIO,MAAJ,IAAc,EAAI,IAAxR;AACD,CAFD;;AAIA,IAAIC,gBAAiBR,GAAD,IAAS;AAC3B,SAAQ,kCAAiCA,IAAIN,EAAG,EAAhD;AACD,CAFD;;AAIA,IAAIe,gBAAiBT,GAAD,IAAS;AAC3B,MAAIU,SAAU,CAACV,IAAIC,OAAJ,GAAe,aAAYD,IAAIC,OAAQ,GAAvC,GAA4C,EAA7C,KACCD,IAAIE,KAAJ,GAAa,YAAWF,IAAIE,KAAM,IAAlC,GAAwC,EADzC,KAECF,IAAII,OAAJ,GAAe,cAAaD,OAAOH,IAAII,OAAX,CAAoB,IAAhD,GAAsD,EAFvD,KAGCJ,IAAIK,WAAJ,GAAmB,kBAAiBL,IAAIK,WAAY,IAApD,GAA0D,EAH3D,KAICL,IAAIM,IAAJ,GAAY,WAAUN,IAAIM,IAAK,IAA/B,GAAqC,EAJtC,KAKCN,IAAIO,MAAJ,GAAc,aAAYP,IAAIO,MAAO,IAArC,GAA2C,EAL5C,CAAd;AAMA,MAAIG,OAAOC,MAAP,GAAc,CAAlB,EAAqB;AACnBD,aAAQA,OAAOE,SAAP,CAAiB,CAAjB,EAAmBF,OAAOC,MAAP,GAAc,CAAjC,CAAR;AACD;AACD,SAAQ,sBAAqBD,MAAO,aAAYV,IAAIN,EAAG,GAAvD;AACD,CAXD;;AAaAmB,OAAOC,OAAP,GAAiB;AACfvB,aAAWA,SADI;AAEfQ,cAAYA,UAFG;AAGfS,iBAAeA,aAHA;AAIfC,iBAAeA;AAJA,CAAjB",
+    "file": "../../../src/model/article/sql.js",
+    "sourcesContent": [
+        "/**\n * 查询列表sql\n * @param {*} params \n */\nlet queryList = (params) => {\n  return `SELECT a.id id, a.type_id type_id,c.id collect_id, b.type_name type_name, a.title title, a.content content, a.create_time create_time, a.art_from art_from, a.author author,d.photo photo \n  FROM article a\n  JOIN article_collect c\n  ON a.collect_id = c.id\n  LEFT JOIN article_type b \n  ON a.type_id = b.id \n  LEFT JOIN blog_user d \n  ON a.user_id = d.id\n  WHERE 1=1 `+\n  (params.collect_id ? `AND a.collect_id = ${params.collect_id}` : \"\") +\n  (params.id ? `AND a.id = ${params.id}` : \"\") +\n  ` ORDER BY a.${params.orderBy} ${params.order}\n  LIMIT ${params.limit}, ${params.offset};`\n}\n\nlet addArticle = (obj) => {\n  return `INSERT INTO article (collect_id, type_id, title, content, create_time, art_from, author) VALUES (${obj.collect_id || '' },${obj.type_id || 0 }, '${obj.title || '' }', '${escape(obj.content) || '' }', '${obj.create_time || '' }', '${obj.from || '' }', '${obj.author || '' }')`\n}\n\nlet deleteArticle = (obj) => {\n  return `DELETE FROM article WHERE ID = ${obj.id}`\n}\n\nlet updateArticle = (obj) => {\n  let setStr =  (obj.type_id ? `type_id = ${obj.type_id},` : '' )+\n                (obj.title ? `title = '${obj.title}',` : '') +\n                (obj.content ? `content = '${escape(obj.content)}',` : '') +\n                (obj.create_time ? `create_time = '${obj.create_time}',` : '') +\n                (obj.from ? `from = '${obj.from}',` : '') +\n                (obj.author ? `author = '${obj.author}',` : '')\n  if (setStr.length>1) {\n    setStr= setStr.substring(0,setStr.length-1)\n  }\n  return `UPDATE article SET ${setStr} WHERE id=${obj.id};`\n}\n\nmodule.exports = {\n  queryList: queryList,\n  addArticle: addArticle,\n  deleteArticle: deleteArticle,\n  updateArticle: updateArticle,\n}"
+    ]
+}

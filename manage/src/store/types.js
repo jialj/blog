@@ -1,0 +1,28 @@
+/**
+ * 文章
+ */
+export const OPEN_ARTICLE_LIST = 'OPEN_ARTICLE_LIST'
+export const OPEN_CUR_ARTICLE = 'OPEN_CUR_ARTICLE'
+export const ARTICLE_LIST = 'ARTICLE_LIST'
+export const UPDATE_ARTICLE_LIST = 'UPDATE_ARTICLE_LIST'
+export const CURRENT_ARTICLE = 'CURRENT_ARTICLE'
+export const ARTICLE_FETCH = 'ARTICLE_FETCH'
+export const ADD_ARTICLE = 'ADD_ARTICLE'
+export const UPDATE_ARTICLE = 'UPDATE_ARTICLE'
+export const DELETE_ARTICLE = 'DELETE_ARTICLE'
+
+/**
+ * 文集
+ */
+export const COLLECT_LIST = 'COLLECT_LIST'
+export const UPDATE_COLLECT_LIST = 'UPDATE_COLLECT_LIST'
+export const CURRENT_COLLECT = 'CURRENT_COLLECT'
+export const ADD_COLLECT = 'ADD_COLLECT'
+export const DELETE_COLLECT = 'DELETE_COLLECT'
+export const UPDATE_COLLECT = 'UPDATE_COLLECT'
+
+/**
+ * 登陆
+ */
+export const LOGIN = 'LOGIN'
+export const LOGIN_INDEX = 'LOGIN_INDEX'
