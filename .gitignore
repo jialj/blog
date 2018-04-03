@@ -13,3 +13,4 @@ display/node_modules
 server/node_modules
 
 mysql.js
+aly_nginx.conf

@@ -1,0 +1,106 @@
+javascript数据类型判断及克隆实现
+
+<header class="post-header" style="color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;"><h1 class="post-title" itemprop="name headline" style="font-size: 26px; margin: 0px; padding: 0px; font-weight: 300; line-height: 1.5; text-align: center; word-break: break-word;"><br></h1></header><div class="post-body" itemprop="articleBody" style="font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify; color: rgb(85, 85, 85);"><p style="margin-bottom: 25px;"><span style="font-size: 20px; font-style: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-weight: inherit;">javascript数据类型判断，typeof、instanceof、 constructor、 prototype方法比较</span></p><h1 id="一、typeof判断数据类型" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5;"><a href="https://jialj.github.io/blog/#ä¸ãtypeofå¤æ&shy;æ°æ®ç±»å" class="headerlink" title="一、typeof判断数据类型" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>一、typeof判断数据类型</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">let a = "iamstring";
+  let b = 222;
+  let c= [1,2,3];
+  let d = new RegExp();
+  let e = function(){
+  
+  };
+  let f = null;
+  
+  console.log(typeof a); --- string 
+  console.log(typeof b); --- number
+  console.log(typeof c); --- object
+  console.log(typeof d); --- object
+  console.log(typeof e); --- function
+  console.log(typeof f); --- object
+  --- 使用typeof时，返回数据类型首字母全部是小写
+  </code></pre><p style="margin-bottom: 25px;">比较结果可以发现 数组、Object、null的类型都是object。</p><h1 id="二、判断已知对象类型的方法：-instanceof" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5;"><a href="https://jialj.github.io/blog/#äºãå¤æ&shy;å·²ç¥å¯¹è±¡ç±»åçæ¹æ³ï¼-instanceof" class="headerlink" title="二、判断已知对象类型的方法： instanceof" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>二、判断已知对象类型的方法： instanceof</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">alert(c instanceof Array) --- true
+  alert(d instanceof RegExp) --- true
+  alert(f instanceof Function) --- true
+  alert(f instanceof function) --- false
+  </code></pre><p style="margin-bottom: 25px;">注意：instanceof 后面一定要是对象类型，并且大小写不能错，该方法适合一些条件选择或分支。</p><h1 id="三、根据对象的constructor判断：-constructor" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5;"><a href="https://jialj.github.io/blog/#ä¸ãæ&nbsp;¹æ®å¯¹è±¡çconstructorå¤æ&shy;ï¼-constructor" class="headerlink" title="三、根据对象的constructor判断： constructor" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>三、根据对象的constructor判断： constructor</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">alert(c.constructor === Array) --- true
+  alert(d.constructor === RegExp) --- true
+  alert(e.constructor === Function) --- true
+  </code></pre><p style="margin-bottom: 25px;">注意： constructor 在类继承时会出错</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">function A(){};
+  function B(){};
+  A.prototype = new B(); //A继承自B
+  var aObj = new A();
+  alert(aobj.constructor === B) --- true;
+  alert(aobj.constructor === A) --- false;
+  </code></pre><p style="margin-bottom: 25px;">而instanceof方法不会出现该问题，对象直接继承和间接继承的都会报true：</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">alert(aobj instanceof B) --- true;
+  alert(aobj instanceof B) --- true;
+  </code></pre><p style="margin-bottom: 25px;">言归正传，解决construtor的问题通常是让对象的constructor手动指向自己：</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">aobj.constructor = A; //将自己的类赋值给对象的constructor属性
+  alert(aobj.constructor === A) --- true;
+  alert(aobj.constructor === B) --- false; //基类不会报true了;
+  </code></pre><h1 id="通用但很繁琐的方法：-prototype" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5;"><a href="https://jialj.github.io/blog/#éç¨ä½å¾ç¹ççæ¹æ³ï¼-prototype" class="headerlink" title="通用但很繁琐的方法： prototype" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>通用但很繁琐的方法： prototype</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">alert(Object.prototype.toString.call(a) === ‘[object String]’) --- true;
+  alert(Object.prototype.toString.call(b) === ‘[object Number]’) --- true;
+  alert(Object.prototype.toString.call(c) === ‘[object Array]’) --- true;
+  alert(Object.prototype.toString.call(d) === ‘[object Date]’) --- true;
+  alert(Object.prototype.toString.call(e) === ‘[object Function]’) --- true;
+  alert(Object.prototype.toString.call(f) === ‘[object Null]’) --- true;
+  </code></pre><p style="margin-bottom: 25px;">大小写不能写错，比较麻烦，但胜在通用。</p><h2 id="深度克隆" style="margin: 20px 0px 15px; padding: 10px 0px 0px; line-height: 1.5; font-size: 20px;"><a href="https://jialj.github.io/blog/#æ·±åº¦åé" class="headerlink" title="深度克隆" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>深度克隆</h2><p style="margin-bottom: 25px;">克隆：新建一个对象，赋值原有对象的所有属性和值。<br>问题的关键点在于，引用类型对象直接赋值的话只是增加指针，新建的对象和原来对象指向的是同块内存区域。</p><h1 id="实现方式一：" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5;"><a href="https://jialj.github.io/blog/#å®ç°æ¹å¼ä¸ï¼" class="headerlink" title="实现方式一：" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>实现方式一：</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">Object.prototype.clone = function(){
+  var res;
+  if( this == null ){
+      res = null;
+  }else{
+      res = (this instanceof Array) ? [] : {}; //初始化res
+      for( var one in this ){
+          //如果不克隆原型链上的属性用  this.hasOwnproperty(one) 判断
+          var val = this[one];
+          if( typeof val == Object ){
+              res[one] = (val instanceof Array) ? []:{};
+              res[one] = val.clone();
+          }else{
+              res[one] = val;
+          }
+      }
+  
+  }
+  return res;
+  }
+  
+  //测试
+  var a ={
+      'a':12,
+      'b':[1,2,3,4],
+      'c':{
+          'cc':23,
+          'ccc':[1,3,6]
+      }
+  };
+  var b = a.clone();
+  console.log(a.b);
+  b.b = '56';
+  console.log(a.b);
+  console.log(b.b);
+  </code></pre><h1 id="实现方式二：" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5;"><a href="https://jialj.github.io/blog/#å®ç°æ¹å¼äºï¼" class="headerlink" title="实现方式二：" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>实现方式二：</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">var cloneObj = function(obj){
+      var str, newobj = obj.constructor === Array ? [] : {};
+      if(typeof obj !== 'object'){
+          return;
+      } else if(window.JSON){
+          str = JSON.stringify(obj), //系列化对象
+          newobj = JSON.parse(str); //还原
+      } else {
+          for(var i in obj){
+              newobj[i] = typeof obj[i] === 'object' ? 
+              cloneObj(obj[i]) : obj[i]; 
+          }
+      }
+      return newobj;
+  };
+  
+  
+  //测试
+  var obj = {a: 0, b: 1, c: 2};
+  var arr = [0, 1, 2];
+  //执行深度克隆
+  var newobj = cloneObj(obj);
+  var newarr = cloneObj(arr);
+  //对克隆后的新对象进行成员删除
+  delete newobj.a;
+  newarr.splice(0,1);
+  console.log(obj, arr, newobj, newarr);
+  //结果： {a: 0, b: 1, c: 2}, [0, 1, 2], {b: 1, c: 2}, [1, 2];
+  </code></pre><p style="margin-bottom: 25px;">参考链接：<a href="http://sentsin.com/web/21.html" target="_blank" rel="external" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;">http://sentsin.com/web/21.html</a>,<a href="http://blog.sina.com.cn/s/blog_51048da70101grz6.html" target="_blank" rel="external" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;">http://blog.sina.com.cn/s/blog_51048da70101grz6.html</a></p>

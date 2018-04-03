@@ -1,0 +1,39 @@
+javascript文件异步加载的一个浅坑
+
+<h2 id="常用javascript文件异步加载的一种方式如下" style="margin: 20px 0px 15px; padding: 10px 0px 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 20px; color: rgb(85, 85, 85); text-align: justify;">常用javascript文件异步加载的一种方式如下</h2><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">a.js中有下面一段代码</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">var oscript = document.createElement('script');
+  oscript.setAttribute('src','b.js');
+  oscript.setAttribute('type','text/javascript');
+  document.getElementsByTagName('head')[0].appendChild(oscript);
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">b.js内容如下</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">//可以是任意一段业务代码
+var val,i=1000
+for(;i&gt;0;i++){
+  val = val*i
+}
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">在a.js中动态加载了b.js。<br>因为项目中引入了jQuery,此时小李要重构上面这一段代码。改完之后a.js是这样</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">$("head").append("&lt;script type='text/javascript' src='b.js' &gt;&lt;/script&gt;");
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">简洁明了，把之前4句话完成的内容一句话搞定，write less,do more! 你以为到这里结束了么?</p><hr style="box-sizing: content-box; height: 3px; margin: 40px 0px; border: none; background-color: rgb(221, 221, 221); background-image: repeating-linear-gradient(-45deg, rgb(255, 255, 255), rgb(255, 255, 255) 4px, transparent 4px, transparent 8px); color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;"><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">问题来了a.js中的程序修改前后执行逻辑是否一致呢？<br>此时我们做如下修改<br>a.js中添加日志</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">var oscript = document.createElement('script');
+  oscript.setAttribute('src','b.js');
+  oscript.setAttribute('type','text/javascript');
+  document.getElementsByTagName('head')[0].appendChild(oscript);
+console.log(3);
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">b.js中添加日志</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">console.log(1);
+//可以是任意一段业务代码
+var val,i=1000
+for(;i&gt;0;i++){
+  val = val*i
+}
+console.log(2)
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">刷新页面,console的输出顺序是 3，1，2。原因很简单，因为，b.js是异步加载的，浏览器在请求b.js资源的时候，a.js会继续执行。b.js请求完成输出了1，2。如果在小李修改后的a.js中加入日志呢？<br>修改a.js为</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">$("head").append("&lt;script type='text/javascript' src='b.js' &gt;&lt;/script&gt;");
+console.log(3);
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">然后刷新页面此时console的输出顺序成了1，2，3。 whats the f**k。<br>看了一下jQuery的append方法添加javascript时候的请求：<br><a href="https://jialj.github.io/blog/images/javascirptå¼æ&shy;¥å&nbsp;è½½.png" class="fancybox" rel="group" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"><img src="https://jialj.github.io/blog/images/javascirptå¼æ&shy;¥å&nbsp;è½½.png" alt="如图所示" style="border: 1px solid rgb(221, 221, 221); margin: 0px auto; max-width: 100%; height: auto; cursor: -webkit-zoom-in; padding: 3px; display: block !important;"></a><br>怎么有X-Requested-With:XMLHttpRequest，竟然是ajax请求。肯定是jQuery在搞鬼，翻看query的源码最终发现了原因，当时小张用到的jQuery版本是1.9.1，最终发现在jQuery的domManip方法中，在6178行，有下面一段代码：</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">if ( node.src ) {
+  // Hope ajax is available...
+  jQuery.ajax({
+      url: node.src,
+      type: "GET",
+      dataType: "script",
+      async: false,
+      global: false,
+      "throws": true
+  });
+} else
+.......
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">哈哈，一切大白于天下了！</p>

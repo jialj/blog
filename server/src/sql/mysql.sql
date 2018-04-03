@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `blogs`.`blog_user`;
-DROP TABLE IF EXISTS `blogs`.`article`;
-DROP TABLE IF EXISTS `blogs`.`article_type`;
-DROP TABLE IF EXISTS `blogs`.`article_collect`;
+DROP TABLE IF EXISTS `blog_user`;
+DROP TABLE IF EXISTS `article`;
+DROP TABLE IF EXISTS `article_type`;
+DROP TABLE IF EXISTS `article_collect`;
 
 CREATE TABLE IF NOT EXISTS `blog_user`(
   `id` INT UNSIGNED AUTO_INCREMENT,

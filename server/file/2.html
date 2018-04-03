@@ -1,0 +1,103 @@
+粘性页脚
+
+<h2 id="sticky-footer的三种实现方式：" style="margin: 20px 0px 15px; padding: 10px 0px 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 20px; color: rgb(85, 85, 85); text-align: justify;">sticky footer的三种实现方式：</h2><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">sticky footer即让元素始终显示在页面底部，当页面内容不满页面高度时，指定元素在当前视口最下方；当页面内容超过页面高度时候，元素自动被挤到内容下方不发生覆盖。</p><h3 id="方式一" style="margin-top: 20px; margin-bottom: 15px; padding-top: 10px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 18px; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#æ¹å¼ä¸" class="headerlink" title="方式一" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>方式一</h3><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">&lt;style&gt;
+  * {
+      margin: 0px;
+  }
+  html,body{
+      height: 100%;
+  }
+  .main-wrapper{
+      min-height: 100%;
+  }
+  .main-wrapper:after{
+      display: block;
+      content: ' ';
+      height: 0px;
+      line-height: 0px;
+      clear: both;
+      visibility: hidden;
+  }
+  .mian{
+      padding-bottom: 100px;
+  }
+  .footer{
+      height: 100px;
+      line-height: 100px;
+      margin:-100px auto 0px auto;
+      background-color: #008000;
+  }
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;div class="main-wrapper"&gt;
+      &lt;div class="mian"&gt;I am content&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="footer"&gt; I am sticky footer &lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">原理：.main-wrapper元素的最小高度设置为100%，.mian元素的padding-bottom设置为100px,<br>.footer元素的margin-top设置为-100px。<a href="https://jialj.github.io/stickfooter/index1.html" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;">参考链接</a></p><h3 id="方式二" style="margin-top: 20px; margin-bottom: 15px; padding-top: 10px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 18px; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#æ¹å¼äº" class="headerlink" title="方式二" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>方式二</h3><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">&lt;style&gt;
+  * {
+      margin: 0;
+  }
+  html, body {
+      height: 100%;
+  }
+  .wrapper {
+      min-height: 100%;
+      height: auto !important; /* 如果你不需要考虑IE6，则可以把这行与下一行代码删除 */
+      height: 100%;
+      margin: 0 auto -4em;
+  }
+  .footer, .push {
+      height: 4em;
+  }
+  .footer, .push {
+      clear: both;
+  }
+  .footer{
+      background-color: #006DCC;
+  }
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;div class="wrapper"&gt;
+      &lt;p&gt;Your website content here.&lt;/p&gt;
+      &lt;p&gt;Your website content here.&lt;/p&gt;
+      &lt;div class="push"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="footer"&gt;
+      &lt;p&gt;Copyright (c) 2008&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">原理：和方式以类似，.wrapper最小高度为100%，且margin-bottom为-4em；.push和.footer高度都是4em。<a href="https://jialj.github.io/stickfooter/index2.html" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;">参考链接</a></p><h3 id="方式三" style="margin-top: 20px; margin-bottom: 15px; padding-top: 10px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 18px; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#æ¹å¼ä¸" class="headerlink" title="方式三" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>方式三</h3><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">&lt;style type="text/css"&gt;
+  *{
+      margin: 0px;
+  }
+  html,body{
+      height: 100%;
+  }
+  .page{
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+  }
+  .main{
+      flex: 1;
+  }
+  .footer{
+      height: 40px;
+      line-height: 40px;
+      background-color: #ccc;
+  }
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;div class="page"&gt;
+      &lt;div class='main'&gt;
+          &lt;p&gt;I am contet&lt;/p&gt;
+          &lt;p&gt;I am contet&lt;/p&gt;
+          &lt;p&gt;I am contet&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class='footer'&gt;
+          I am footer
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">原理：利用flex布局，flex-derection设置为column表示纵向分布。.mian的flex设为1，.footer元素根据需要指定高度，.main即自适应占满page中除了footer之外的所有高度。<a href="https://jialj.github.io/stickfooter/index3.html" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;">参考链接</a></p>

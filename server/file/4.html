@@ -1,0 +1,95 @@
+javascript上下文
+
+<h2 id="javascript的上下文看三个例子" style="margin: 20px 0px 15px; padding: 10px 0px 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 20px; color: rgb(85, 85, 85); text-align: justify;">javascript的上下文看三个例子</h2><h1 id="示例1：" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#ç¤ºä¾1ï¼" class="headerlink" title="示例1：" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>示例1：</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">var persion = {
+  name : 'anan',
+  getName : function(){
+      console.log(this.name);
+      console.log(this);
+  } 
+};
+
+persion.getName();
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">返回结果中可以看到，this是persion</p><h1 id="示例2：" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#ç¤ºä¾2ï¼" class="headerlink" title="示例2：" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>示例2：</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">function persion( name ){
+  this.name = name;
+  console.log(this.name);
+  console.log(this);
+};
+persion('anan');
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">返回结果中可以看到，this是全局对象（浏览器中是window，node环境中是global)</p><h1 id="示例3：" style="font-size: 22px; margin: 0px; padding: 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#ç¤ºä¾3ï¼" class="headerlink" title="示例3：" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>示例3：</h1><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">function Persion( name ){
+  this.name = name;
+  this.getName = function(){
+      console.log(this.name);
+      console.log(this);
+  }
+}
+var persion = new Persion('anan');
+persion.getName();
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">返回结果中可以看到，this是Persion的一个实例</p><h2 id="如何改变上下文" style="margin: 20px 0px 15px; padding: 10px 0px 0px; line-height: 1.5; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 20px; color: rgb(85, 85, 85); text-align: justify;"><a href="https://jialj.github.io/blog/#å¦ä½æ¹åä¸ä¸æ" class="headerlink" title="如何改变上下文" style="background-color: transparent; color: rgb(85, 85, 85); text-decoration-line: none; border-bottom: 1px solid rgb(153, 153, 153); word-wrap: break-word;"></a>如何改变上下文</h2><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">使用apply、call方法改变上下文。apply和call方法作用相同，区别在二者接收的参数不同，具体不相熟。<br>再次仅以call方法为例，请看以下示例。</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">var persion = {
+  name : 'anan',
+  getName : function( str ){
+      console.log(str + this.name);
+  } 
+};
+
+var dog = {
+  name : 'a huang'
+}
+
+persion.getName.call(dog, 'my name is ');
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">把上面的方法例子稍加修改，就可以实现继承</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">function Persion( name ){
+  this.name = name;
+  this.getName = function(){
+      console.log( 'My name is ' + this.name );
+  };
+}
+function Dog( name ){
+  Persion.call(this,name);
+}
+var dog = new Dog( 'a huang' );
+dog.getName();
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">—————–下面的内容与博客标题不符———————-<br>总结一下其他集中实现继承的方法：<br>使用原型链实现继承：</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">function Person(){
+
+}
+
+Person.prototype.name = "anan"; 
+Person.prototype.getName = function(){ 
+console.log(this.name); 
+} 
+
+function Child(){ 
+} 
+
+Child.prototype = new Person();//关键行
+
+Child.prototype.hello = "hello world"; 
+Child.prototype.say = function(){ 
+console.log(this.hello); 
+} 
+var t = new Child(); 
+t.getName(); 
+t.say();
+</code></pre><p style="margin-bottom: 25px; color: rgb(85, 85, 85); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; text-align: justify;">实现继承除了apply、call方法还可以使用Object.create(proto[, propertiesObject])方法<br>示例如下：</p><pre style="overflow: auto; font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; font-size: 13px; margin-top: 20px; margin-bottom: 20px; padding: 15px; color: rgb(77, 77, 76); background: rgb(247, 247, 247); line-height: 1.6; text-align: justify;"><code style="font-family: consolas, Menlo, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, monospace; padding: 0px; word-break: break-all; background: none; border-radius: 4px; text-shadow: none;">function Person(){
+
+}
+
+Person.prototype.name = "anan"; 
+Person.prototype.getName = function(){ 
+console.log(this.name); 
+} 
+
+function Child(){
+   Person.call(this);
+}
+
+Child.prototype = Object.create( Person.prototype );//关键行
+Child.prototype.constructor = Child;
+
+
+Child.prototype.hello = "hello world"; 
+Child.prototype.say = function(){ 
+console.log(this.hello); 
+} 
+var t = new Child(); 
+t.getName(); 
+t.say();
+console.log(t); //观察下t的constructor</code></pre>

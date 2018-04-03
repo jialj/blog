@@ -6,12 +6,14 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-//eleme ui
+// eleme ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// 引入组件
 Vue.use(Vuex)
 Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
