@@ -25,6 +25,7 @@
 		}
 	}
 </script>
+
 <style>
 	*{
 		box-sizing: border-box;
