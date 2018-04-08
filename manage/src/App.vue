@@ -33,7 +33,4 @@
 	input,button,select,textarea{
 		outline:none;
 	}
-	.main-wrap{
-		height: 100vh;
-	}
 </style>
