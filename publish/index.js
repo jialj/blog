@@ -16,8 +16,8 @@ handler.on('error', function (err) {
 })
 // 监听到push事件的时候执行我们的自动化脚本
 handler.on('push', function (event) {
-  console.log('event.ref--', event.ref);
-  if(event.ref === 'refs/heads/master'){
+  if(event.payload === 'refs/heads/master'){
+    console.log('执行脚本，自动同步最新程序构建代码');
     runCommand('sh', ['./auto_build.sh'], function (txt) {
       console.log(txt)
     })
