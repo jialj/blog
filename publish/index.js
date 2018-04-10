@@ -18,7 +18,7 @@ handler.on('error', function (err) {
 handler.on('push', function (event) {
   if(event.payload.ref === 'refs/heads/master'){
     console.log('---自动同步最新程序,并完成构建!');
-    runCommand('sh', ['./auto_build.sh'], function (txt) {
+    runCommand('sh', ['./a.sh'], function (txt) {
       console.log(txt)
     })
   }
