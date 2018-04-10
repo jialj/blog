@@ -11,6 +11,9 @@ manage//test/unit/coverage/
 
 display/node_modules
 server/node_modules
+publish/node_modules
+publish/config.js
+publish/auto_build.sh
 
 mysql.js
 aly_nginx.conf
