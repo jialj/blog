@@ -3,17 +3,16 @@
 .vscode
 
 manage/node_modules
-manage/dist/
 manage/npm-debug.log*
 manage/yarn-debug.log*
 manage/yarn-error.log*
-manage//test/unit/coverage/
 
 display/node_modules
 server/node_modules
+
 publish/node_modules
 publish/config.js
-publish/auto_build.sh
+publish/a.sh
 
 mysql.js
 aly_nginx.conf
