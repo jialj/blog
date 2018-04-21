@@ -19,3 +19,12 @@
     width: 1170px;
   }
 }
+
+@media (max-width: 666px) {
+  .container{
+    min-width: 240px;
+  }
+  .blog-derc{
+    display: none;
+  }
+}

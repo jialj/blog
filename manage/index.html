@@ -5,25 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>奔跑的蜗牛</title>
     <meta name="description" content="前端,计算机,javascript,js,html,css,node,jialj">
+    <meta name="360-site-verification" content="d4edf451d84f2a5744a8de994ba11f98" />
   </head>
   <body>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
-    
-
-    <!-- UY BEGIN -->
-    <!--PC和WAP自适应版-->
-    <div id="SOHUCS" sid="请将此处替换为配置SourceID的语句" ></div> 
-    <script type="text/javascript"> 
-    (function(){ 
-    var appid = 'cytyg8IqK'; 
-    var conf = 'prod_b9faf75e57cc7cf08f9be152d89338e1'; 
-    var width = window.innerWidth || document.documentElement.clientWidth; 
-    if (width < 960) { 
-    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-    <!-- UY END -->
+    <div id="gitalk-container" class="container" style="margin-top:20px"></div>
   </body>
+  
   <script>
+    // 百度统计
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
@@ -31,5 +21,21 @@
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
     })();
-    </script>
+  </script>
+  <!-- gitalk评论框 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script>
+    var gitalk = new Gitalk({
+        clientID: '91a3e167d9c257bf2ab5',
+        clientSecret: '4290bc7032081f962208b0ce098cb5f982003b37',
+        repo: 'blog',
+        owner: 'jialj',
+        admin: ['jialj'],
+        id: 'Blog',      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
 </html>
