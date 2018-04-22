@@ -85,4 +85,9 @@
     color: #2f2f2f;
     text-rendering: optimizeLegibility;
   }
+  @media (max-width:750px) {
+    .content-box{
+      width: 100%;
+    }
+  }
 </style>
